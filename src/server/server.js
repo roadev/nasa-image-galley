@@ -74,20 +74,25 @@ const setResponse = (html, css, preloadedState, manifest) => {
 };
 
 const renderApp = (req, res) => {
-  const store = createStore(reducer);
+  const store = createStore(reducer, {});
   const preloadedState = store.getState();
   const sheets = new ServerStyleSheets();
 
   const html = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={{}}>
-              {renderRoutes(serverRoutes)}
-       </StaticRouter>
+
+        {sheets.collect(
+          <ThemeProvider theme={theme}>
+            {renderRoutes(serverRoutes)}
+          </ThemeProvider>,
+        )}
+
+      </StaticRouter>
     </Provider>,
   );
 
   const css = sheets.toString();
-
 
   res.send(setResponse(html, css, preloadedState, req.hashManifest));
 };

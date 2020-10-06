@@ -9,7 +9,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 require('dotenv').config();
 
 const isDev = (process.env.ENV === 'development');
-const entry = ['./src/frontend/index.js'];
+const entry = ['./src/client/index.js'];
 
 if (isDev) {
   entry.push('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true');
@@ -66,6 +66,20 @@ module.exports = {
         },
       },
       {
+        test: /\.styl$/,
+        use: [
+          {
+            loader: 'style-loader', // creates style nodes from JS strings
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
+          },
+          {
+            loader: 'stylus-loader', // compiles Stylus to CSS
+          },
+        ],
+      },
+      {
         test: /\.(s*)css$/,
         use: [
           {
@@ -73,14 +87,6 @@ module.exports = {
           },
           'css-loader',
           'sass-loader',
-        ],
-      },
-      {
-        test: /\.styl$/,
-        use: [
-          'style-loader',
-          'css-loader?modules&camelCase&localIdentName=[path]__[name]__[local]--[hash:base64:5]',
-          'stylus-loader',
         ],
       },
       {
