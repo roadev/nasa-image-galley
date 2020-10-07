@@ -1,8 +1,10 @@
 /* eslint-disable global-require */
 import express from 'express';
+import path from 'path';
 import dotenv from 'dotenv';
 import webpack from 'webpack';
 import helmet from 'helmet';
+import favicon from 'serve-favicon';
 import React from 'react';
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/core/styles';
 import { renderToString } from 'react-dom/server';
@@ -39,6 +41,8 @@ if (ENV === 'dev') {
 
     next();
   });
+
+  app.use(favicon(path.join(__dirname, 'public', 'assets', 'favicon.ico')));
   app.use(express.static(`${__dirname}/public`));
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
@@ -54,10 +58,11 @@ const setResponse = (html, css, preloadedState, manifest) => {
       <!DOCTYPE html>
       <html>
         <head>
-          <link rel="stylesheet" href="${mainStyles}" type="text/css" />
+          <link rel="icon" type="image/ico" href="favicon.ico" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <style id="jss-server-side">${css}</style>
+          <link rel="stylesheet" href="${mainStyles}" type="text/css" />
           <title>NASA Image Gallery</title>
         </head>
         <body>

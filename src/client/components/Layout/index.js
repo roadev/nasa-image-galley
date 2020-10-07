@@ -1,11 +1,12 @@
 import React from 'react';
+import Header from '../Header/Header';
 import './styles.styl';
 
 const Layout = ({ children }) => (
-  <div>
-    <h1 className="div">Hi!!!</h1>
+  <>
+    <Header />
     {children}
-  </div>
+  </>
 );
 
 export default Layout;

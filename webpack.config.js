@@ -5,6 +5,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 require('dotenv').config();
 
@@ -90,7 +91,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|gif|jpg)$/,
+        test: /\.(png|gif|jpg|svg|ico)$/,
         use: [
           {
             'loader': 'file-loader',
@@ -115,10 +116,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isDev ? 'assets/[name].css' : 'assets/app-[hash].css',
     }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'src/client/assets/images/favicon.ico', to: path.resolve(__dirname, 'src', 'server', 'public', 'assets'),
+        },
+      ],
+    }),
     // isDev ?
     //   () => {} :
-      new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: path.resolve(__dirname, 'src/server/public'),
-      }),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: path.resolve(__dirname, 'src/server/public'),
+    }),
   ],
 };
