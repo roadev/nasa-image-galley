@@ -1,0 +1,4 @@
+export default {
+  SET_ITEMS: 'SET_ITEMS',
+  TOGGLE_ITEMS_LOADING: 'TOGGLE_ITEMS_LOADING',
+};
