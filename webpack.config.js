@@ -115,8 +115,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isDev ? 'assets/[name].css' : 'assets/app-[hash].css',
     }),
-    isDev ?
-      () => {} :
+    // isDev ?
+    //   () => {} :
       new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: path.resolve(__dirname, 'src/server/public'),
       }),

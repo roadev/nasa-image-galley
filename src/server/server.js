@@ -46,8 +46,8 @@ if (ENV === 'dev') {
 }
 
 const setResponse = (html, css, preloadedState, manifest) => {
-  const mainStyles = manifest ? manifest['main.css'] : 'assets/main.css';
-  const mainBuild = manifest ? manifest['main.js'] : 'assets/main.js';
+  const mainStyles = manifest ? manifest['main.css'] : 'assets/app.css';
+  const mainBuild = manifest ? manifest['main.js'] : 'assets/app.js';
   const vendorBuild = manifest ? manifest['vendors.js'] : 'assets/vendor.js';
   return (
     `
