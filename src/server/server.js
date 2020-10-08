@@ -9,7 +9,8 @@ import React from 'react';
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/core/styles';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import serverRoutes from '../client/routes/serverRoutes';
@@ -79,7 +80,7 @@ const setResponse = (html, css, preloadedState, manifest) => {
 };
 
 const renderApp = (req, res) => {
-  const store = createStore(reducer, {});
+  const store = createStore(reducer, {}, applyMiddleware(thunk));
   const preloadedState = store.getState();
   const sheets = new ServerStyleSheets();
 

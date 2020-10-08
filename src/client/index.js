@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 // import { ThemeProvider } from '@material-ui/core/styles';
 import { StylesProvider } from '@material-ui/core/styles';
@@ -12,7 +13,7 @@ import App from './routes';
 const history = createBrowserHistory();
 const preloadedState = window.__PRELOADED_STATE__;
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, preloadedState, composeEnhancers());
+const store = createStore(reducers, preloadedState, composeEnhancers(applyMiddleware(thunk)));
 
 delete window.__PRELOADED_STATE__;
 

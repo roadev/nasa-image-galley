@@ -1,4 +1,4 @@
-import { getItems } from '../../services/api';
+import getItems from '../../services/api';
 
 const receiveItems = items => ({
   type: 'SET_ITEMS',
@@ -13,10 +13,14 @@ export function fetchItems(query) {
   return async (dispatch) => {
     dispatch(toggleItemsLoading());
     const items = await getItems(query);
-    if (items.ok) {
-      dispatch(receiveItems(items.data));
+    if (!items.error) {
+      dispatch(receiveItems(items));
       dispatch(toggleItemsLoading());
     }
     console.log(items);
   };
+}
+
+export function hi() {
+  return null;
 }
