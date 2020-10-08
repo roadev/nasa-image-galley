@@ -1,43 +1,49 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
-import Input from '@material-ui/core/Input';
-// import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-// import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+// import { makeStyles } from '@material-ui/core/styles';
+
 import Grid from '@material-ui/core/Grid';
 
 import ItemList from '../../components/ItemList/ItemList';
+import Search from '../../components/Search';
 // import DirectionsIcon from '@material-ui/icons/Directions';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: '2px 4px',
-    display: 'flex',
-    alignItems: 'center',
-    width: 400,
-  },
-  input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
-  },
-  iconButton: {
-    padding: 10,
-  },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
-}));
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     padding: '2px 4px',
+//     display: 'flex',
+//     alignItems: 'center',
+//     width: 400,
+//   },
+//   input: {
+//     marginLeft: theme.spacing(1),
+//     flex: 1,
+//   },
+//   iconButton: {
+//     padding: 10,
+//   },
+//   divider: {
+//     height: 28,
+//     margin: 4,
+//   },
+// }));
 
 const Home = ({ fetchItems, imageGalleryData }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
-    fetchItems('pluto');
+
   }, []);
+
+  const handleOnChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const search = (e) => {
+    e.preventDefault();
+    fetchItems(searchInput);
+  };
 
   return (
     <section>
@@ -50,12 +56,7 @@ const Home = ({ fetchItems, imageGalleryData }) => {
         {/* <IconButton type="submit" className={classes.iconButton} aria-label="search">
           <SearchIcon />
         </IconButton> */}
-        <form noValidate autoComplete="off">
-          <Input placeholder="Search" inputProps={{ 'aria-label': 'search' }} />
-          <IconButton type="submit" className={classes.iconButton} aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </form>
+        <Search search={search} handleOnChange={handleOnChange} />
       </article>
       <article>
         <Grid container>

@@ -5,8 +5,8 @@ import Item from '../Item/Item';
 
 const ItemList = ({ items }) => {
   return (
-    items.map(item => (
-      <Grid item xs={12} md={4}>
+    items.map((item, index) => (
+      <Grid item xs={12} md={4} key={`item.title-${index + 1}`}>
         <Item {...item} />
       </Grid>
     ))
