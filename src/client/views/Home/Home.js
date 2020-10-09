@@ -48,6 +48,16 @@ const Home = ({ fetchItems, imageGalleryData }) => {
   return (
     <section>
       <article>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+        >
+          <Grid item xs={8} sm={6}>
+            <Search search={search} handleOnChange={handleOnChange} />
+          </Grid>
+        </Grid>
         {/* <InputBase
           className={classes.input}
           placeholder="Search Google Maps"
@@ -56,13 +66,12 @@ const Home = ({ fetchItems, imageGalleryData }) => {
         {/* <IconButton type="submit" className={classes.iconButton} aria-label="search">
           <SearchIcon />
         </IconButton> */}
-        <Search search={search} handleOnChange={handleOnChange} />
+
       </article>
       <article>
         <Grid container>
           <ItemList items={imageGalleryData.items} />
         </Grid>
-
       </article>
     </section>
   );
